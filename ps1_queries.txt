@@ -1,0 +1,138 @@
+/* 
+ * CS 460/660: Problem Set 1, SQL Programming Problems
+ *
+ * Put your name and email address below:
+ *     name:
+ *     email:
+ */
+
+/**********************************************************
+ * REMEMBER: You should include only the SQL commands,
+ * *NOT* the results that they produce.
+ **********************************************************/
+
+/*
+ * Problem 5. Put your SQL command for this problem below.	
+ */
+
+SELECT name, pob, dob
+FROM Person
+WHERE name = 'Forest Whitaker' 
+OR name = 'Cate Blanchett';
+
+/*
+ * Problem 6. Put your SQL command for this problem below.	
+ */
+
+SELECT Movie.name, Oscar.year
+FROM Movie, Oscar
+WHERE movie_id = id
+AND Oscar.year > 1989
+AND Oscar.year <2000
+AND type = 'BEST-PICTURE'
+ORDER BY year;
+
+/*
+ * Problem 7. Put your SQL command for this problem below.	
+ */
+
+SELECT COUNT(DISTINCT Movie.name)
+FROM Person, Actor, Movie
+WHERE Person.id = actor_id
+AND movie_id = Movie.id
+AND pob NOT LIKE '%USA%';
+
+/*
+ * Problem 8. Put your SQL command for this problem below.	
+ */
+
+SELECT name, runtime
+FROM Movie
+WHERE genre LIKE '%N%'
+AND runtime = (SELECT MAX(runtime)
+               FROM Movie
+               WHERE genre LIKE '%N%');
+
+/*
+ * Problem 9. Put your SQL command for this problem below.	
+ */
+
+SELECT Person.name, O1.type, O2.year, O1.year
+FROM Person, Oscar AS O1, Oscar AS O2
+WHERE Person.id = O1.person_id
+     AND O1.person_id = O2.person_id
+     AND O1.type = O2.type
+     AND O1.year = O2.year + 1;
+
+/*
+ * Problem 10. Put your SQL command for this problem below.	
+ */
+
+SELECT Movie.name, COUNT(*)
+FROM Movie, Oscar
+WHERE Movie.id = movie_id
+GROUP BY Movie.id
+HAVING COUNT(*) > 2
+ORDER BY COUNT(*) DESC
+
+/*
+ * Problem 11. Put your SQL command for this problem below.	
+ */
+
+SELECT DISTINCT name, pob
+FROM Person, Director
+WHERE Person.id = director_id
+AND pob LIKE '%France';
+
+/*
+ * Problem 12. Put your SQL command for this problem below.	
+ */
+
+SELECT earnings_rank, Movie.name, Oscar.type
+FROM Movie LEFT OUTER JOIN Oscar ON Movie.id = movie_id
+WHERE earnings_rank<26
+ORDER BY earnings_rank;
+
+/*
+ * Problem 13. Put your SQL command for this problem below.	
+ */
+
+SELECT COUNT(*)
+FROM Movie, Oscar
+WHERE type = 'BEST-PICTURE'
+  AND movie_id = id
+  AND runtime > (SELECT AVG(runtime)
+                 FROM Movie);
+
+/*
+ * Problem 14. Put your SQL command for this problem below.	
+ */
+
+SELECT type, Person.name, Movie.name
+FROM Movie, Oscar LEFT OUTER JOIN Person ON person_id = Person.id
+WHERE Oscar.year = 2003
+  AND  movie_id = Movie.id
+
+/*
+ * Problem 15. Put your SQL command for this problem below.	
+ */
+
+
+
+/*
+ * Problem 16. Put your SQL command for this problem below.	
+ */
+
+
+
+/*
+ * Problem 17 (required for CS 660 students; optional for CS 460 students). 
+ * Put your SQL command for this problem below.	
+ */
+
+
+
+/*
+ * Problem 18 (required for CS 660 students; optional for CS 460 students). 
+ * Put your SQL command(s) for this problem below.	
+ */
